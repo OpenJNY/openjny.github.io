@@ -121,7 +121,7 @@ deploy:
 自分用にカスタマイズした設定をフォーク先のレポジトリで管理することで、複数のブログを作るときに使いやすくする狙いがある。
 ちなみにこれがそう。
 
-* https://github.com/OpenJNY/hexo-theme-next
+* [https://github.com/OpenJNY/hexo-theme-next](https://github.com/OpenJNY/hexo-theme-next)
 
 こいつを `themes` に配置する。
 
@@ -133,14 +133,14 @@ git submodule add git@github.com:OpenJNY/hexo-theme-next.git themes/next
 
 ### VS Code による執筆
 
-vs code だと、Hexo のブログを書くときに色々嬉しいことがある。
-markdown の preview だとか textlint だとかは割とどのエディタでも使えるが、特に vs code ならではの利点は Paste Image である。
+vs code には hexo の記事を書くときに色々嬉しいことがあります。
+markdown の preview だとか textlint だとかは、割とどのエディタでも使えるものですが、特に vs code ならではの利点は Paste Image。
 
-* {% exturl Paste Image - Visual Studio Marketplace https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image %}
+* [Paste Image - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image)
 
 
 Paste Image は画像を扱う vs code のプラグインで、こいつはかなりの優れもの。
-クリップボードにコピーされている画像を markdown に埋め込みつつ、いい感じに実体化してくれる。
+クリップボードにコピーされている画像を markdown に埋め込みつつ、いい感じに実体化してくれます。
 
 例えば、`.vscode/settings.json` を次のように設定すれば、`source/images/{article-name}/{datetime}.png` として自動的に実体化し、そのパスを makrdown に埋め込んでくれる。
 
@@ -162,18 +162,17 @@ Paste Image は画像を扱う vs code のプラグインで、こいつはか�
 * [https://github.com/OpenJNY/openjny.github.io](https://github.com/OpenJNY/openjny.github.io)
 
 `src` ブランチでソースコードを管理し、`master` に生成した html たちを配置して公開する運用をとっています。
-具体的には、ローカルの `master` がリモートの `src` に対応していて、デプロイ先にリモートの `master` を使っています。
-つまり、「その他」までで示した手順を踏んだ後、次のようなことをすれば、同じような結果になると思います。
+「その他」までで示した手順を踏んだ後、次のようなことをすれば、同じような結果になると思います。
 
 ```bash
 git init
 git commit -a -m ":tada: initial commit"
 git remote add origin awesome-repository
 git push -u origin master:src
-hexo deploy g
+hexo deploy
 ```
 
-このような環境では、次のようなことをすれば新たな記事が執筆できます。
+このような環境では、新たな記事が次のような流れで執筆できます。
 
 ```bash
 # create a new post
@@ -184,8 +183,8 @@ code $(find source/_posts -maxdepth 1 -type f -print0 | xargs -0 ls -drt | tail 
 
 # deploy and backup
 git commit -am "perfect commit"
-git push
-hexo deploy g
+git push origin HEAD:src # or simply $ git push
+hexo clean && hexo deploy
 ```
 
 また、新しいPC等で再度環境を整えるには、次の手順を踏むだけでOKです。
