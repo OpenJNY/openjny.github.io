@@ -1,0 +1,12 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+  "editor.formatOnType": false,
+  "pasteImage.defaultName": "Y-MM-DD-HH-mm-ss",
+  // "pasteImage.insertPattern": "![alt](images/${currentFileNameWithoutExt}/${imageFileName})",imageFilePath
+  "pasteImage.insertPattern": "![](${imageFilePath})",
+  "pasteImage.path": "${projectRoot}/source/images/${currentFileNameWithoutExt}",
+  "pasteImage.basePath": "${projectRoot}/source",
+  "pasteImage.forceUnixStyleSeparator": true,
+  "pasteImage.prefix": "/"
+}
