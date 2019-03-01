@@ -4,7 +4,7 @@ date: {{ date }}
 category:
     - 論文
 tags:
-    - Uncategorized
+    - Unknown
 ---
 
 タイトル
@@ -13,20 +13,20 @@ tags:
 著者
 :   
 
-Publish
+出版年
 :   
 
 URL
 :   
 
-読む前の
+---
 
 <!-- more -->
 
 ## 背景
 
 
-## 問題
+## 問題の定式化
 
 
 ## 既存手法
