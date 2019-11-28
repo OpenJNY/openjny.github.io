@@ -1,0 +1,10 @@
+version: '3'
+services:
+  hexo:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      # - .:/blog
+      - ./source:/blog/source
+    command: hexo server

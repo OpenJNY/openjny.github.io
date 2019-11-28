@@ -10,6 +10,14 @@ cd blog
 npm install
 ```
 
+Docker を使う場合は
+
+```
+git clone --recurse-submodules --branch src git@github.com:OpenJNY/openjny.github.io.git blog
+cd blog
+docker-compsoe up
+```
+
 ## 更新
 
 ```bash
