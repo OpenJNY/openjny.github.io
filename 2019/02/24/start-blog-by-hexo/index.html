@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="ja">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="静的サイトジェネレータ Hexo で生成したブログを github pages で公開するまでの手順のメモ">
+<meta name="keywords" content="hexo,static site generator,markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo によるブログ執筆環境の構築">
+<meta property="og:url" content="https://openjny.github.io/2019/02/24/start-blog-by-hexo/index.html">
+<meta property="og:site_name" content="OpenJNY&#39;s Blog">
+<meta property="og:description" content="静的サイトジェネレータ Hexo で生成したブログを github pages で公開するまでの手順のメモ">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https://openjny.github.io/images/2019-02-24-hexo-blog/next-theme.png">
+<meta property="og:updated_time" content="2019-11-14T13:15:31.077Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo によるブログ執筆環境の構築">
+<meta name="twitter:description" content="静的サイトジェネレータ Hexo で生成したブログを github pages で公開するまでの手順のメモ">
+<meta name="twitter:image" content="https://openjny.github.io/images/2019-02-24-hexo-blog/next-theme.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="OpenJNY's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://openjny.github.io/2019/02/24/start-blog-by-hexo/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Hexo によるブログ執筆環境の構築 | OpenJNY's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="ja">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OpenJNY's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">OpenJNY の日記</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="ナビゲーションバーの切り替え">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>ホーム</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>プロフィール</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>タグ</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>カテゴリ</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>アーカイブ</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://openjny.github.io/2019/02/24/start-blog-by-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="OpenJNY">
+      <meta itemprop="description" content="日々のメモに近い">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OpenJNY's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo によるブログ執筆環境の構築
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">投稿日</span>
+              
+
+              
+                
+              
+
+              <time title="作成日：2019-02-24 02:48:09" itemprop="dateCreated datePublished" datetime="2019-02-24T02:48:09+09:00">2019-02-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">編集日</span>
+                
+                <time title="修正日：2019-11-14 22:15:31" itemprop="dateModified" datetime="2019-11-14T22:15:31+09:00">2019-11-14</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">カテゴリ</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/その他/" itemprop="url" rel="index"><span itemprop="name">その他</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x9759;&#x7684;&#x30B5;&#x30A4;&#x30C8;&#x30B8;&#x30A7;&#x30CD;&#x30EC;&#x30FC;&#x30BF; Hexo &#x3067;&#x751F;&#x6210;&#x3057;&#x305F;&#x30D6;&#x30ED;&#x30B0;&#x3092; github pages &#x3067;&#x516C;&#x958B;&#x3059;&#x308B;&#x307E;&#x3067;&#x306E;&#x624B;&#x9806;&#x306E;&#x30E1;&#x30E2;</p>
+<a id="more"></a>
+<h2 id="&#x306F;&#x3058;&#x3081;&#x306B;">&#x306F;&#x3058;&#x3081;&#x306B;</h2>
+<p><code>.md</code> &#x3084; <code>.py</code> &#x3068;&#x3044;&#x3063;&#x305F;&#x30C6;&#x30AD;&#x30B9;&#x30C8;&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x304B;&#x3089;&#x3001;&#x9759;&#x7684;&#x306A;&#x30C9;&#x30AD;&#x30E5;&#x30E1;&#x30F3;&#x30C8;&#x3084;&#x30D6;&#x30ED;&#x30B0;&#xFF08;&#x3064;&#x307E;&#x308A; html/css/js&#xFF09;&#x3092;&#x751F;&#x6210;&#x3059;&#x308B;&#x30C4;&#x30FC;&#x30EB;&#x3092; <strong>&#x9759;&#x7684;&#x30B5;&#x30A4;&#x30C8;&#x30B8;&#x30A7;&#x30CD;&#x30EC;&#x30FC;&#x30BF; (static site generator; SSG)</strong> &#x3068;&#x547C;&#x3073;&#x307E;&#x3059;&#x3002;SSG &#x3092;&#x4F7F;&#x3046;&#x3068;&#x3001;&#x4F8B;&#x3048;&#x3070;&#x3001;markdown &#x3067;&#x30D6;&#x30ED;&#x30B0;&#x3092;&#x66F8;&#x304F;&#x3053;&#x3068;&#x304C;&#x51FA;&#x6765;&#x3066;&#x3001;&#x3057;&#x304B;&#x3082;&#x305D;&#x306E;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x30D0;&#x30FC;&#x30B8;&#x30E7;&#x30F3;&#x7BA1;&#x7406;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002; &#x4E16;&#x306E;&#x4E2D;&#x306B;&#x306F;&#x305F;&#x304F;&#x3055;&#x3093;&#x306E; SSG &#x304C;&#x3042;&#x308A;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30DA;&#x30FC;&#x30B8;&#x3067;&#x7C21;&#x6F54;&#x306B;&#x307E;&#x3068;&#x3081;&#x3089;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/myles/awesome-static-generators" target="_blank" rel="noopener">myles/awesome-static-generators: A curated list of static web site generators.</a></li>
+</ul>
+<p>&#x3053;&#x306E;&#x8A18;&#x4E8B;&#x3067;&#x306F;&#x3001;<strong>Hexo</strong> &#x3068;&#x547C;&#x3070;&#x308C;&#x308B; Javascript &#x88FD;&#x306E; SSG &#x306B;&#x3064;&#x3044;&#x3066;&#x6CE8;&#x76EE;&#x3057;&#x307E;&#x3059;&#x3002; Hexo &#x306E;&#x4E00;&#x822C;&#x7684;&#x306A;&#x4F7F;&#x3044;&#x65B9;&#x306F;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x30B5;&#x30A4;&#x30C8;&#x7B49;&#x306B;&#x307E;&#x3068;&#x3081;&#x3089;&#x308C;&#x3066;&#x3044;&#x307E;&#x3059;&#x304C;&#x3001;&#x3053;&#x3053;&#x3067;&#x81EA;&#x5206;&#x306E;&#x4F7F;&#x3044;&#x3084;&#x3059;&#x3044;&#x74B0;&#x5883;&#x3092;&#x69CB;&#x7BC9;&#x3059;&#x308B;&#x3053;&#x3068;&#x306B;&#x5C02;&#x5FF5;&#x3057;&#x3066;&#x3001;&#x305D;&#x306E;&#x624B;&#x9806;&#x3092;&#x5B8C;&#x7D50;&#x306B;&#x793A;&#x3057;&#x305F;&#x3044;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://pepese.github.io/blog/hexo-github-pages/" target="_blank" rel="noopener">Hexo &#x3067;&#x4F5C;&#x3063;&#x305F;&#x30D6;&#x30ED;&#x30B0;&#x3092; Github Pages &#x3067;&#x516C;&#x958B; | &#x307A;&#x30FC;&#x307A;&#x30FC; SE &#x306E;&#x30C6;&#x30C3;&#x30AF;&#x30D6;&#x30ED;&#x30B0;</a></li>
+</ul>
+<h2 id="&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;">&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;</h2>
+<h3 id="&#x672C;&#x4F53;">&#x672C;&#x4F53;</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"><span class="comment"># cd working-dirctory</span></span><br><span class="line">hexo init &lt;blog-name&gt;</span><br></pre></td></tr></table></figure>
+<p>&#x8A2D;&#x5B9A; <code>_config.yml</code> &#x306E;&#x5927;&#x307E;&#x304B;&#x306A;&#x8A2D;&#x5B9A;&#x65B9;&#x6CD5;</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">&#x30BF;&#x30A4;&#x30C8;&#x30EB; </span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string"> &#x30B5;&#x30D6;&#x30BF;&#x30A4;&#x30C8;&#x30EB; </span></span><br><span class="line"><span class="attr">description:</span> <span class="string"> &#x30D6;&#x30ED;&#x30B0;&#x306E;&#x8AAC;&#x660E; </span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string"> &#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9; 1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9; 2</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">OpenJNY</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">ja</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Tokyo</span></span><br><span class="line"></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://openjny.github.io/</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year-:month-:day-:title.md</span> <span class="comment"># File name of new posts</span></span><br><span class="line"><span class="attr">default_layout:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">titlecase:</span> <span class="literal">true</span> <span class="comment"># Transform title into titlecase</span></span><br><span class="line"><span class="attr">filename_case:</span> <span class="number">1</span> <span class="comment"># lower-case</span></span><br><span class="line"><span class="attr">external_link:</span> <span class="literal">true</span> <span class="comment"># Open external links in new tab</span></span><br><span class="line"><span class="attr">render_drafts:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">relative_link:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">future:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="&#x30EC;&#x30F3;&#x30C0;&#x30EA;&#x30F3;&#x30B0;">&#x30EC;&#x30F3;&#x30C0;&#x30EA;&#x30F3;&#x30B0;</h3>
+<p>&#x6570;&#x5F0F;&#x3084; GHF &#x306A; md &#x3092;&#x66F8;&#x304F;&#x305F;&#x3081;&#x306B; render &#x30A8;&#x30F3;&#x30B8;&#x30F3;&#x3092; pandoc &#x3078;&#x5909;&#x66F4;&#x3059;&#x308B;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked</span><br><span class="line">npm i hexo-renderer-pandoc --save</span><br></pre></td></tr></table></figure>
+<p>katex &#x3067;&#x6570;&#x5F0F;&#x3092;&#x30EC;&#x30F3;&#x30C0;&#x30EA;&#x30F3;&#x30B0;&#x3059;&#x308B;&#x305F;&#x3081;&#x306B; <code>hexo-katex-macros</code> &#x3092;&#x5C0E;&#x5165;&#x3059;&#x308B;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i hexo-katex-macros --save</span><br></pre></td></tr></table></figure>
+<p>&#x305D;&#x306E;&#x307E;&#x307E;&#x3067;&#x3082;&#x4F7F;&#x3048;&#x308B;&#x304C;&#x3001;&#x30DE;&#x30AF;&#x30ED;&#x3092;&#x8A2D;&#x5B9A;&#x3057;&#x305F;&#x3051;&#x308C;&#x3070;&#x3001;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x7BA1;&#x7406;&#x3057;&#x3066;&#x308B;&#x30EA;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x306B;&#x30B5;&#x30F3;&#x30D7;&#x30EB;&#x304C;&#x3042;&#x308B;&#x306E;&#x3067;&#x305D;&#x308C;&#x3092;&#x53C2;&#x8003;&#x306B;&#x3057;&#x306A;&#x304C;&#x3089; <code>_config.yml</code> &#x306B;&#x8A18;&#x8FF0;&#x3002;<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># _config.yml</span></span><br><span class="line"><span class="attr">katex:</span></span><br><span class="line">  <span class="attr">macros:</span></span><br><span class="line">    <span class="string">&quot;\\set&quot;</span><span class="string">:</span> <span class="string">&quot;\\left\\{ #1 \\right\\}&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="&#x30C7;&#x30D7;&#x30ED;&#x30A4;">&#x30C7;&#x30D7;&#x30ED;&#x30A4;</h3>
+<p>&#x30B5;&#x30A4;&#x30C8;&#x306E;&#x751F;&#x6210;&#x304B;&#x3089;&#x30C7;&#x30D7;&#x30ED;&#x30A4;&#x307E;&#x3067;&#x3092;&#x81EA;&#x52D5;&#x5316;&#x3059;&#x308B;&#x70BA;&#x306B; <code>hexo-deployer-git</code> &#x3092;&#x8FFD;&#x52A0;&#x3059;&#x308B;&#x3002; &#x4F7F;&#x3044;&#x65B9;&#x306F; <code>hexo deploy g</code> &#x307F;&#x305F;&#x3044;&#x306A;&#x611F;&#x3058;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>&#x8A2D;&#x5B9A;&#x306F; <code>_config.yml</code> &#x3092;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x3059;&#x308B;&#x3002;</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:OpenJNY/openjny.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">&quot;[update] Site updated: <span class="template-variable">{{ now(&apos;YYYY-MM-DD HH:mm:ss&apos;) }}</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>&#x306A;&#x304A;&#x3001;gh-pages &#x4EE5;&#x5916;&#x306E;&#x30DB;&#x30B9;&#x30C6;&#x30A3;&#x30F3;&#x30B0;&#x30B5;&#x30FC;&#x30D3;&#x30B9;&#x3092;&#x4F7F;&#x3046;&#x3068;&#x304D;&#x306F;&#x3001;&#x305D;&#x308C;&#x306B;&#x5FDC;&#x3058;&#x3066;&#x9069;&#x5F53;&#x306A;&#x3082;&#x306E;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x3059;&#x308B;&#x304B;&#x3001;CI/CD &#x6A5F;&#x80FD;&#x3092;&#x4F7F;&#x3063;&#x3066;&#x30C7;&#x30D7;&#x30ED;&#x30A4;&#x3092;&#x884C;&#x3046;&#x3068;&#x826F;&#x3044;&#x3002;</p>
+<h2 id="&#x30C6;&#x30FC;&#x30DE;">&#x30C6;&#x30FC;&#x30DE;</h2>
+<p><img src="/images/2019-02-24-hexo-blog/next-theme.png"></p>
+<p><code>hexo-theme-next</code> &#x3068;&#x3044;&#x3046;&#x540D;&#x524D;&#x306E;&#x7D20;&#x6674;&#x3089;&#x3057;&#x3044;&#x30C6;&#x30FC;&#x30DE;&#x304C;&#x3042;&#x308B;&#x306E;&#x3067;&#x3001;&#x305D;&#x308C;&#x3092;&#x30D5;&#x30A9;&#x30FC;&#x30AF;&#x3057;&#x305F;&#x3082;&#x306E;&#x3092;&#x4F7F;&#x3046;&#x3002; &#x81EA;&#x5206;&#x7528;&#x306B;&#x30AB;&#x30B9;&#x30BF;&#x30DE;&#x30A4;&#x30BA;&#x3057;&#x305F;&#x8A2D;&#x5B9A;&#x3092;&#x30D5;&#x30A9;&#x30FC;&#x30AF;&#x5148;&#x306E;&#x30EC;&#x30DD;&#x30B8;&#x30C8;&#x30EA;&#x3067;&#x7BA1;&#x7406;&#x3059;&#x308B;&#x3053;&#x3068;&#x3067;&#x3001;&#x8907;&#x6570;&#x306E;&#x30D6;&#x30ED;&#x30B0;&#x3092;&#x4F5C;&#x308B;&#x3068;&#x304D;&#x306B;&#x4F7F;&#x3044;&#x3084;&#x3059;&#x304F;&#x3059;&#x308B;&#x72D9;&#x3044;&#x304C;&#x3042;&#x308B;&#x3002; &#x3061;&#x306A;&#x307F;&#x306B;&#x3053;&#x308C;&#x304C;&#x305D;&#x3046;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/OpenJNY/hexo-theme-next" target="_blank" rel="noopener">https://github.com/OpenJNY/hexo-theme-next</a></li>
+</ul>
+<p>&#x3053;&#x3044;&#x3064;&#x3092; <code>themes</code> &#x306B;&#x914D;&#x7F6E;&#x3059;&#x308B;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git submodule add git@github.com:OpenJNY/hexo-theme-next.git themes/next</span><br></pre></td></tr></table></figure>
+<h2 id="&#x305D;&#x306E;&#x4ED6;">&#x305D;&#x306E;&#x4ED6;</h2>
+<h3 id="vs-code- &#x306B;&#x3088;&#x308B;&#x57F7;&#x7B46;">VS Code &#x306B;&#x3088;&#x308B;&#x57F7;&#x7B46;</h3>
+<p>vs code &#x306B;&#x306F; hexo &#x306E;&#x8A18;&#x4E8B;&#x3092;&#x66F8;&#x304F;&#x3068;&#x304D;&#x306B;&#x8272;&#x3005;&#x5B09;&#x3057;&#x3044;&#x3053;&#x3068;&#x304C;&#x3042;&#x308A;&#x307E;&#x3059;&#x3002; markdown &#x306E; preview &#x3060;&#x3068;&#x304B; textlint &#x3060;&#x3068;&#x304B;&#x306F;&#x3001;&#x5272;&#x3068;&#x3069;&#x306E;&#x30A8;&#x30C7;&#x30A3;&#x30BF;&#x3067;&#x3082;&#x4F7F;&#x3048;&#x308B;&#x3082;&#x306E;&#x3067;&#x3059;&#x304C;&#x3001;&#x7279;&#x306B; vs code &#x306A;&#x3089;&#x3067;&#x306F;&#x306E;&#x5229;&#x70B9;&#x306F; Paste Image&#x3002;</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image" target="_blank" rel="noopener">Paste Image - Visual Studio Marketplace</a></li>
+</ul>
+<p>Paste Image &#x306F;&#x753B;&#x50CF;&#x3092;&#x6271;&#x3046; vs code &#x306E;&#x30D7;&#x30E9;&#x30B0;&#x30A4;&#x30F3;&#x3067;&#x3001;&#x3053;&#x3044;&#x3064;&#x306F;&#x304B;&#x306A;&#x308A;&#x306E;&#x512A;&#x308C;&#x3082;&#x306E;&#x3002; &#x30AF;&#x30EA;&#x30C3;&#x30D7;&#x30DC;&#x30FC;&#x30C9;&#x306B;&#x30B3;&#x30D4;&#x30FC;&#x3055;&#x308C;&#x3066;&#x3044;&#x308B;&#x753B;&#x50CF;&#x3092; markdown &#x306B;&#x57CB;&#x3081;&#x8FBC;&#x307F;&#x3064;&#x3064;&#x3001;&#x3044;&#x3044;&#x611F;&#x3058;&#x306B;&#x5B9F;&#x4F53;&#x5316;&#x3057;&#x3066;&#x304F;&#x308C;&#x307E;&#x3059;&#x3002;</p>
+<p>&#x4F8B;&#x3048;&#x3070;&#x3001;<code>.vscode/settings.json</code> &#x3092;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306B;&#x8A2D;&#x5B9A;&#x3059;&#x308C;&#x3070;&#x3001;<code>source/images/{article-name}/{datetime}.png</code> &#x3068;&#x3057;&#x3066;&#x81EA;&#x52D5;&#x7684;&#x306B;&#x5B9F;&#x4F53;&#x5316;&#x3057;&#x3001;&#x305D;&#x306E;&#x30D1;&#x30B9;&#x3092; makrdown &#x306B;&#x57CB;&#x3081;&#x8FBC;&#x3093;&#x3067;&#x304F;&#x308C;&#x308B;&#x3002;</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;pasteImage.defaultName&quot;: &quot;Y-MM-DD-HH-mm-ss&quot;,</span><br><span class="line">&quot;pasteImage.insertPattern&quot;: &quot;![](${imageFilePath})&quot;,</span><br><span class="line">&quot;pasteImage.path&quot;: &quot;${projectRoot}/source/images/${currentFileNameWithoutExt}&quot;,</span><br><span class="line">&quot;pasteImage.basePath&quot;: &quot;${projectRoot}/source&quot;,</span><br><span class="line">&quot;pasteImage.forceUnixStyleSeparator&quot;: true,</span><br><span class="line">&quot;pasteImage.prefix&quot;: &quot;/&quot;</span><br></pre></td></tr></table></figure>
+<p>&#x666E;&#x6BB5;&#x3067;&#x3082;&#x304B;&#x306A;&#x308A;&#x91CD;&#x5B9D;&#x3057;&#x3066;&#x3044;&#x308B;&#x306E;&#x3067;&#x3001;hexo &#x306B;&#x95A2;&#x4FC2;&#x306A;&#x304F;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB;&#x3059;&#x308B;&#x3053;&#x3068;&#x3092;&#x30AA;&#x30B9;&#x30B9;&#x30E1;&#x3057;&#x305F;&#x3044;&#x3002;</p>
+<h3 id="git- &#x306B;&#x3088;&#x308B;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x7BA1;&#x7406;">Git &#x306B;&#x3088;&#x308B;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x7BA1;&#x7406;</h3>
+<p>&#x3053;&#x306E;&#x624B;&#x9806;&#x3067;&#x4F5C;&#x6210;&#x3057;&#x305F;&#x30D6;&#x30ED;&#x30B0;&#x3092; GitHub &#x3067;&#x516C;&#x958B;&#x3057;&#x3066;&#x307E;&#x3059;&#x3002;</p>
+<ul>
+<li><a href="https://github.com/OpenJNY/openjny.github.io" target="_blank" rel="noopener">https://github.com/OpenJNY/openjny.github.io</a></li>
+</ul>
+<p><code>src</code> &#x30D6;&#x30E9;&#x30F3;&#x30C1;&#x3067;&#x30BD;&#x30FC;&#x30B9;&#x30B3;&#x30FC;&#x30C9;&#x3092;&#x7BA1;&#x7406;&#x3057;&#x3001;<code>master</code> &#x306B;&#x751F;&#x6210;&#x3057;&#x305F; html &#x305F;&#x3061;&#x3092;&#x914D;&#x7F6E;&#x3057;&#x3066;&#x516C;&#x958B;&#x3059;&#x308B;&#x904B;&#x7528;&#x3092;&#x3068;&#x3063;&#x3066;&#x3044;&#x307E;&#x3059;&#x3002; &#x300C;&#x305D;&#x306E;&#x4ED6;&#x300D;&#x307E;&#x3067;&#x3067;&#x793A;&#x3057;&#x305F;&#x624B;&#x9806;&#x3092;&#x8E0F;&#x3093;&#x3060;&#x5F8C;&#x3001;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x3053;&#x3068;&#x3092;&#x3059;&#x308C;&#x3070;&#x3001;&#x540C;&#x3058;&#x3088;&#x3046;&#x306A;&#x7D50;&#x679C;&#x306B;&#x306A;&#x308B;&#x3068;&#x601D;&#x3044;&#x307E;&#x3059;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git commit -a -m <span class="string">&quot;:tada: initial commit&quot;</span></span><br><span class="line">git remote add origin awesome-repository</span><br><span class="line">git push -u origin master:src</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p>&#x3053;&#x306E;&#x3088;&#x3046;&#x306A;&#x74B0;&#x5883;&#x3067;&#x306F;&#x3001;&#x65B0;&#x305F;&#x306A;&#x8A18;&#x4E8B;&#x304C;&#x6B21;&#x306E;&#x3088;&#x3046;&#x306A;&#x6D41;&#x308C;&#x3067;&#x57F7;&#x7B46;&#x3067;&#x304D;&#x307E;&#x3059;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># create a new post</span></span><br><span class="line">hexo new post <span class="string">&quot;Awesome article&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># edit it</span></span><br><span class="line">code $(find <span class="built_in">source</span>/_posts -maxdepth 1 -<span class="built_in">type</span> f -print0 | xargs -0 ls -drt | tail -n 1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># deploy and backup</span></span><br><span class="line">git commit -am <span class="string">&quot;perfect commit&quot;</span></span><br><span class="line">git push origin HEAD:src <span class="comment"># or simply $ git push</span></span><br><span class="line">hexo clean &amp;&amp; hexo deploy</span><br></pre></td></tr></table></figure>
+<p>&#x307E;&#x305F;&#x3001;&#x65B0;&#x3057;&#x3044; PC &#x7B49;&#x3067;&#x518D;&#x5EA6;&#x74B0;&#x5883;&#x3092;&#x6574;&#x3048;&#x308B;&#x306B;&#x306F;&#x3001;&#x6B21;&#x306E;&#x624B;&#x9806;&#x3092;&#x8E0F;&#x3080;&#x3060;&#x3051;&#x3067; OK &#x3067;&#x3059;&#x3002;</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --recurse-submodules -b src git@github.com:OpenJNY/openjny.github.io.git blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>&#x4F55;&#x304B;&#x306E;&#x53C2;&#x8003;&#x306B;&#x306A;&#x308C;&#x3070;&#x5E78;&#x3044;&#x3067;&#x3059;&#x3002;</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p><a href="https://github.com/OpenJNY/hexo-katex-macros/tree/master/examples" target="_blank" rel="noopener">hexo-katex-macros/examples at master &#xB7; OpenJNY/hexo-katex-macros</a><a href="#fnref1" class="footnote-back" role="doc-backlink">&#x21A9;</a></p></li>
+</ol>
+</section>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/static-site-generator/" rel="tag"># static site generator</a>
+          
+            <a href="/tags/markdown/" rel="tag"># markdown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/02/pyro-introduction-to-models/" rel="prev" title="Pyro で始める確率プログラミング言語">
+                Pyro で始める確率プログラミング言語 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            見出し
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            概要
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="OpenJNY">
+            
+              <p class="site-author-name" itemprop="name">OpenJNY</p>
+              <p class="site-description motion-element" itemprop="description">日々のメモに近い</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">ポスト</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">カテゴリ</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">タグ</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#はじめに"><span class="nav-number">1.</span> <span class="nav-text">はじめに</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#インストール"><span class="nav-number">2.</span> <span class="nav-text">インストール</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本体"><span class="nav-number">2.1.</span> <span class="nav-text">本体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#レンダリング"><span class="nav-number">2.2.</span> <span class="nav-text">レンダリング</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#デプロイ"><span class="nav-number">2.3.</span> <span class="nav-text">デプロイ</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#テーマ"><span class="nav-number">3.</span> <span class="nav-text">テーマ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#その他"><span class="nav-number">4.</span> <span class="nav-text">その他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vs-code- による執筆"><span class="nav-number">4.1.</span> <span class="nav-text">VS Code による執筆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git- によるソースコード管理"><span class="nav-number">4.2.</span> <span class="nav-text">Git によるソースコード管理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">OpenJNY</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
