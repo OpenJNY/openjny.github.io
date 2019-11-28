@@ -6,4 +6,4 @@ msg="$@"
     exit 1
 }
 
-git commit -a -m \""$msg"\" && git push origin HEAD:src && hexo clean && hexo deploy
+git commit -a -m \"$msg\" && git push origin HEAD:src && hexo clean && hexo deploy
