@@ -1,0 +1,20 @@
+{
+  "name": "vuepress-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "author": "OpenJNY",
+  "license": "ISC",
+  "devDependencies": {
+    "@iktakahiro/markdown-it-katex": "^3.1.0",
+    "markdown-it-deflist": "^2.0.3",
+    "markdown-it-footnote": "^3.0.2",
+    "vuepress": "^1.2.0",
+    "vuepress-theme-meteorlxy": "^1.7.1"
+  },
+  "dependencies": {}
+}
