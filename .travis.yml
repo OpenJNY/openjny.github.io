@@ -6,13 +6,15 @@ install:
 script:
   - yarn build
   - echo $GITHUB_TOKEN
+before_deploy:
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@travis-ci.org"
 deploy:
   provider: pages
-  repo: openjny/openjny.github.io
-  target_branch : master
   skip_cleanup: true
   local_dir: docs/.vuepress/dist
   github_token: $GITHUB_TOKEN # defined in travis
   keep_history: true
+  target_branch : master
   on:
-    branch: master
+    branch: vuepress
