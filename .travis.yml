@@ -5,8 +5,11 @@ install:
   - yarn install
 script:
   - yarn build
+  - echo $GITHUB_TOKEN
 deploy:
   provider: pages
+  repo: openjny/openjny.github.io
+  target_branch : master
   skip_cleanup: true
   local_dir: docs/.vuepress/dist
   github_token: $GITHUB_TOKEN # defined in travis
