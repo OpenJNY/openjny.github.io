@@ -12,7 +12,7 @@ before_deploy:
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: docs/.vuepress/dist
+  local_dir: src/.vuepress/dist
   github_token: $GITHUB_TOKEN # defined in travis
   keep_history: true
   target_branch : master
