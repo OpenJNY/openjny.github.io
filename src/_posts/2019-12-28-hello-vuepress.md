@@ -291,7 +291,7 @@ $ yarn add markdown-it-deflist --dev
 
     サポートベクターマシンは、現在知られている手法の中でも認識性能が優れた学習モデルの一つである。サポートベクターマシンが優れた認識性能を発揮することができる理由は、未学習データに対して高い識別性能を得るための工夫があるためである。
 
-## 新規ポストのテンプレート
+## 新規ポスト
 
 
 ```md
@@ -315,6 +315,64 @@ header-image:
 [[toc]]
 
 ## はじめに
+```
+
+## デプロイ
+
+### ブランチ構成
+
+自分の場合、既に `openjny.github.io` レポジトリを次のように使っていました。
+
+- `master` ブランチ: 静的ファイルの配置用
+- `src` ブランチ: hexo の設定/記事ファイルの管理用
+
+なので `src` はそのままにして、`vuepress` 用の孤児ブランチを作ることにしました。
+
+```bash
+$ cd vuepress-blog
+
+$ git init
+$ git checkout -b vuepress
+$ git add -A
+$ git commit -m ":tada: first commit!"
+
+$ git remote add -t vuepress origin git@github.com:openjny/openjny.github.io.git
+$ git push -u origin vuepress
+```
+
+これで今度からは `vuepress` ブランチを使えば良い。
+
+```bash
+$ git clone --branch vuepress git@github.com:OpenJNY/openjny.github.io.git blog
+$ cd blog
+```
+
+## 継続的インテグレーション
+
+[公式の方法](https://vuepress.vuejs.org/guide/deploy.html#github-pages) に従って、以下のようなスクリプトも書いてはみたものの、結局 Travis の `page` provider に頼った。
+
+https://github.com/OpenJNY/openjny.github.io/blob/vuepress/.travis.yml
+
+```sh
+#!/usr/bin/env sh
+
+# abort on errors
+set -e
+
+# build
+yarn build
+
+# navigate into the build output directory
+cd "${VUEPRESS_DIR}/.vuepress/dist"
+
+git init
+git add -A
+git commit -m "Publishing site on $(date "+%Y-%m-%d %H:%M:%S")"
+
+# if you are deploying to https://<USERNAME>.github.io
+git push -f --quiet "https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_USER}.github.io.git" master
+
+cd -
 ```
 
 ## 今後の予定
