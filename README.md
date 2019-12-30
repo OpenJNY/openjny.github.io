@@ -22,6 +22,22 @@ root@containerid:/blog # yarn
 root@containerid:/blog # yarn dev
 ```
 
+## new post
+
+```bash
+$ yarn new <template-name> <title> [<title-for-filename>]
+```
+
+例
+
+```bash
+$ yarn new base "テンプレート エンジン Mustache で新規記事の生成" create-a-new-article-with-mustache
+# yarn run v1.21.1
+# $ node new-post.js base "テンプレート エンジン Mustache で新規記事の生成" create-a-new-article-with-mustache
+# Created a new post at: src\_posts\2019-12-31-create-a-new-article-with-mustache.md
+# Done in 0.28s.
+```
+
 ## deploy
 
 `vuepress` ブランチに push すれば、Travis が走って `master` ブランチに `src/.vuepress/dist` を展開してくれる。
