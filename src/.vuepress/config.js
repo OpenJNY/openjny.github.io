@@ -113,6 +113,10 @@ module.exports = {
                 text: 'Qiita',
                 link: 'https://qiita.com/OpenJNY'
             },
+            {
+                text: 'Repo',
+                link: 'https://github.com/OpenJNY/openjny.github.io/tree/vuepress'
+            },
         ],
         // Comments config. See the [Posts Comments] section below.
         comments: false,
