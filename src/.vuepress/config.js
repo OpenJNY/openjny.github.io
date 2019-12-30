@@ -139,11 +139,11 @@ module.exports = {
         }],
         ['meta', {
             name: "og:title",
-            content: "og title"
+            content: "$(ls /openjny/blog)"
         }],
         ['meta', {
             name: "og:description",
-            content: "description"
+            content: "OpenJNY のブログです。技術的な内容から日常的なことまで。"
         }],
         ['meta', {
             name: "og:type",
@@ -151,7 +151,7 @@ module.exports = {
         }],
         ['meta', {
             name: "og:url",
-            content: "og　url"
+            content: "https://openjny.github.io/"
         }],
         // ['link', {
         //     rel: 'stylesheet',
