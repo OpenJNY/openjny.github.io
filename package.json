@@ -16,8 +16,10 @@
     "markdown-it-footnote": "^3.0.2",
     "mustache": "^3.2.1",
     "path": "^0.12.7",
-    "vuepress": "^1.2.0",
-    "vuepress-theme-meteorlxy": "^1.7.1"
+    "vuepress": "^1.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "git": "^0.1.5",
+    "vuepress-theme-meteorlxy": "https://github.com/OpenJNY/vuepress-theme-meteorlxy"
+  }
 }
