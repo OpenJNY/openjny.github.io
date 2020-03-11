@@ -8,7 +8,7 @@ tags:
   - Networking
 ---
 
-Azure のデータセンターにアクセスするユーザーが、低いレイテンシで快適にサービスを利用するために、Azure では ISP (自律システム) の障害を検知するシステムを活用しています。この記事では、そのシステム "BlameIt" を紹介するブログを和訳してみました。
+Azure にアクセスするユーザーが低レイテンシで快適にサービスを利用できるように、Microsoft では ISP (自律システム) の障害を検知するシステムを活用しています。そのシステム "BlameIt" を紹介する公式ブログがあったので、それを和訳してみました。
 
 [Who’s to blame? Debugging Internet performance for Azure users with BlameIt - Microsoft Research](https://www.microsoft.com/en-us/research/blog/whos-to-blame-debugging-internet-performance-for-azure-users-with-blameit/)
 
