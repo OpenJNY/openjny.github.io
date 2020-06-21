@@ -1,0 +1,10 @@
+version: "3"
+services:
+  blog:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/blog
+      - /blog/node_modules
+    command: ["yarn", "dev"]

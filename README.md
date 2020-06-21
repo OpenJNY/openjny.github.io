@@ -38,6 +38,13 @@ $ yarn new base "テンプレート エンジン Mustache で新規記事の生�
 # Done in 0.28s.
 ```
 
+## docker-compose
+
+```bash
+$ docker-compose up -d
+$ docker-compose blog yarn new base foo-bar # to create a new article
+```
+
 ## deploy
 
 `vuepress` ブランチに push すれば、Travis が走って `master` ブランチに `src/.vuepress/dist` を展開してくれる。
