@@ -1,9 +1,11 @@
 ---
 title: "Linux での TCP KeepAlive 有効化方法"
 date: 2021-03-11 15:29:11
-category: その他
+category: Linux
 tags:
-  - タグ
+  - Networking
+  - KeepAlive
+  - TCP
 ---
 
 Linux の TCP KeepAlive について調べたので、その備忘録です。
