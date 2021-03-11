@@ -162,7 +162,7 @@ $ diff on.log off.log
 
 TCP KeepAlive が有効化されている時は `setsockopt` で指定されていますね。strace で見た時に `setsockopt(<sockfd>, SOL_SOCKET, SO_KEEPALIVE, [1], 4)`  が存在すれば有効になってそうな匂いを感じます (`TCP_KEEPIDLE` とか `TCP_KEEPINTVL` はデフォルト インターバル値の上書きと予想できます)。
 
-実際、Linux のドキュメントを探したらありました。セクション 4.2 にまさに探していた情報が載っていましたね。
+Linux のドキュメントを検索したところ、下記のセクション 4.2 にまさに探していた情報が載っていました。嗅覚は当たっていました :clap:
 
 > All you need to enable keepalive for a specific socket is to set the specific socket option on the socket itself. The prototype of the function is as follows:
 >
@@ -175,13 +175,13 @@ TCP KeepAlive が有効化されている時は `setsockopt` で指定されて�
 
 第 3 引数に `1` (の値を格納した 4 byte のメモリスペースへのポインタ) を指定すれば、第 1 引数に指定した `sockfd` の TCP KeepAlive が有効になるそうです。
 
-## ソースコードのないアプリケーションを TCP KeepAlive 対応させるには?
+## OS の仕組みでなんとかならない？
 
-`setsockopt` でごにょごにょすれば TCP KeepAlive を有効化できるのはわかった。OS の仕組みで TCP KeepAlive 有効化できないの？と思いますよね。
+`setsockopt` でごにょごにょすれば TCP KeepAlive を有効化できるのはわかった。でもそれだとソースコードをいじらないといけなくて、めんどくさい。後は自分がアプリケーションのソースコードを保有してる/改修できるとは限らないので、なんとか OS の仕組みで TCP KeepAlive 有効化できないの？と思いますよね。
 
 しっかりありました。`LD_PRELOAD` というものだそうです。
 
-`LD_PRELOAD` は Linux の特別な環境変数で、動的ライブラリ/共有ライブラリへのパスを値として設定すると、任意の動的ライブラリよりもそのライブラリが優先的にリンクされてプログラムが実行されます。この機能に着目したのが、`libkeepalive.so` です。`socket` を開いた時に、一緒に TCP KeepAlive も有効化するように、カスタマイズされたソケット ライブラリを提供するものです。
+`LD_PRELOAD` は Linux の特別な環境変数で、動的ライブラリ/共有ライブラリへのパスを値として設定すると、任意の動的ライブラリよりもそのライブラリが優先的にリンクされてプログラムが実行されます。この機能に着目したのが、`libkeepalive.so` です。これは、`socket` を開いた時に一緒に TCP KeepAlive も有効化するように、TCP KeepAlive にチューニングされたソケット機能を提供するライブラリです。
 
 http://libkeepalive.sourceforge.net/
 
@@ -189,7 +189,12 @@ http://libkeepalive.sourceforge.net/
 
 ### テストプログラム
 
-[TCP Keepalive HOWTO](https://tldp.org/HOWTO/html_single/TCP-Keepalive-HOWTO/) のセクション 4.3 にあるプログラム `test` を動かしてみます。`test` は、単に socket を新たにオープンした直後、その socket の TCP KeepAlive 設定 (SO_KEEPALIVE) 値を出力します。通常であれば無効化 (`0`) となっているはずの値ですね。その後に、明示的に TCP KeepAlive を有効化してから、再度 SO_KEEPALIVE を出力します。最後には `1` となっているはずです。
+[TCP Keepalive HOWTO](https://tldp.org/HOWTO/html_single/TCP-Keepalive-HOWTO/) のセクション 4.3 にあるプログラム `test` を動かしてみます。
+
+* `test` は、単に socket をひとつ新たにオープンします。
+* その直後、socket の TCP KeepAlive 設定 (SO_KEEPALIVE) 値を出力します。通常であれば無効化 (`0`) となっているはずの値ですね。
+* その後、`setsockopt` を使って、明示的に TCP KeepAlive を有効化します。
+* 再度 SO_KEEPALIVE の現在値を出力します。最後には有効 (`1`) となっているはずです。
 
 ```bash
 cat <<EOF >test.c
@@ -256,7 +261,7 @@ getsockopt(3, SOL_SOCKET, SO_KEEPALIVE, [1], [4]) = 0
 SO_KEEPALIVE is ON
 ```
 
-何の変哲もない期待通りの動作です。`setsockopt` で `SO_KEEPALIVE` を 1 にセットしない限り、デフォルトでは TCP KeepAlive は無効です。
+何の変哲もない期待通りの動作です。繰り返しになりますが、`setsockopt` で `SO_KEEPALIVE` を 1 にセットしない限り、デフォルトでは TCP KeepAlive は無効のままです。
 
 ### libkeepalive ありのテストプログラム
 
@@ -286,8 +291,11 @@ SO_KEEPALIVE is ON
 +++ exited with 0 +++
 ```
 
-先程と違い `setsockopt(3, SOL_SOCKET, SO_KEEPALIVE, [1], 4) = 0` が (見ず知らずのうちに) 挿入されていることがわかります。
+先程と違い `setsockopt(3, SOL_SOCKET, SO_KEEPALIVE, [1], 4) = 0` が (知らない間に) 挿入されていることがわかります。これが共有ライブラリの差し替えによる効果です。ただし、`LD_PRELOAD` を使うと、アプリ上で開いた全ての socket で TCP KeepAlive が有効化されるので、その点は配慮しなくてはなりません。
 
+## まとめ
+
+TCP コネクション確立時に発行されるシステムコールが、プログラムの作り方やコマンドの指定方法によって異なることを確認し、`setsockopt`  が TCP KeepAlive に関わる重要なシステムコールであることを見てきました。最終的に `setsockopt` をカーネルに送らなければならないことに変わりはありませんが、共有ライブラリの差し替えテクニック (`libkeepalive`) によって、任意のプログラムで強制的に TCP KeepAlive を有効化する技術についても紹介しました。`nc` のような TCP KeepAlive に対応していないアプリをカスタマイズするのに使えそうです。
 
 
 ## 参考
