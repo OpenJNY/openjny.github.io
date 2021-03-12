@@ -16,7 +16,7 @@ Linux の TCP KeepAlive について調べたので、その備忘録です。
 
 ## TL;DR
 
-Linux や TCP KeepAlive に対応していますが、普通に `socket` を開くだけだと有効化されません。既定では無効の状態です。アプリケーションが `setsockopt` システムコールを (第 3 引数 = 1 で) 呼び出して、初めて TCP KeepAlive が有効化されます (ちなみに既定で TCP KeepAlive が無効なのは、Windows でも同様です)。
+Linux は TCP KeepAlive に対応していますが、普通に `socket` を開くだけだと有効化されません。既定では無効の状態です。アプリケーションが `setsockopt` システムコールを (第 3 引数 = 1 で) 呼び出して、初めて TCP KeepAlive が有効化されます (ちなみに既定で TCP KeepAlive が無効なのは、Windows でも同様です)。
 
 アプリケーションで TCP KeepAlive を有効化するには、2 つの方法がとれます。
 
@@ -29,7 +29,9 @@ Linux や TCP KeepAlive に対応していますが、普通に `socket` を開�
 
 TCP KeepAlive とは、TCP コネクションがアクティブな状態なのか (対向側やその間のネットワークが死んでないか) を検知する為の正常性監視の仕組みです。TCP のレイヤーで実装されているので、基本的にカーネルで制御する義務があります。HTTP KeepAlive とは全くの別物であることに注意しましょう。
 
-主たる目的は正常性監視ですが、定期的にパケットを送信する仕組みとして TCP KeepAlive が使われることもあります。ネットワーク データパス上に存在する L4 のネットワーク アプライアンス機器には、しばしばタイムアウトが実装されています。このような機器ではフローテーブル等で通信の状態を保持しておかなければならず、タイムアウトがなければリソース枯渇を招く為です。例えば、30 分間ずっと無通信状態の TCP コネクションがあれば、それ以降のパケットはフォワーディングされません。ここに、(例えば 10 分毎に死活監視を行うような) TCP KeepAlive を導入する動機があります。
+主たる目的は正常性監視ですが、定期的にパケットを送信する仕組みとして TCP KeepAlive が使われることもあります。ネットワーク データパス上に存在する L4 のネットワーク アプライアンス機器には、しばしばタイムアウトが実装されています。このような機器ではフローテーブル等で通信の状態を保持しておかなければならず、タイムアウトがなければリソース枯渇を招く為です。
+
+例えば、30 分間ずっと無通信状態の TCP コネクションがあれば、それ以降のパケットはフォワーディングしないアプライアンスがあったとします。ここに、TCP KeepAlive を導入する動機があります。TCP KeepAlive で 10 分毎に死活監視を行えば、長時間 TCP コネクションが非活性になるのを予防できます。
 
 まとめると、TCP KeepAlive の目的は大まかに 2 つです。これらの目的を達成するために、TCP KeepAlive はコネクション単位で有効/無効が設定できるようになっています。
 
@@ -38,17 +40,17 @@ TCP KeepAlive とは、TCP コネクションがアクティブな状態なの�
 
 ## どうすれば TCP KeepAlive を有効化できるのか
 
-答えから言えば、Linux で TCP KeepAlive を有効化するには `setsockopt` システムコールを使う必要があります。以下のようなシステムコールが `strace` で確認できれば、その TCP コネクションには TCP KeepAlive が有効になります (そうでない限り無効)。
+結論から言えば、Linux で TCP KeepAlive を有効化するには `setsockopt` システムコールを使う必要があります。以下のようなシステムコールが `strace` で確認できれば、その TCP コネクションで TCP KeepAlive が有効になります (そうでない限り無効です)。
 
 ```
 setsockopt(<sockfd>, SOL_SOCKET, SO_KEEPALIVE, [1], 4)
 ```
 
-※ 第 3 引数が `[0]` の場合、それは明示的な無効化を意味します。
+※ 第 3 引数が `[0]` の場合、明示的な無効化を意味します。
 
 ### socket とシステムコール
 
-Linux 並びに Windows では、TCP コネクションを活用したいアプリケーションは socket と呼ばれる特殊なファイルを開きます。例えば、Python3 で (socket を開いて) サーバーに接続するクライアントを作る時は、以下のようなコードを書くでしょう。
+そもそもの話として、Linux や Windows 等の標準的な OS では、TCP コネクションを活用したいアプリケーションは socket と呼ばれる特殊なファイルを開きます。例えば、Python3 で (socket を開いて) サーバーに接続するクライアントを作る時は、以下のようなコードを書くでしょう。
 
 ```py
 import socket
@@ -59,7 +61,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     time.sleep(5)
 ```
 
-実際にこのプログラムを動かしてみると、(`socket.sendall` や `socket.recv` がないので) 何もクライアントから送受信することは無い (e.g. HTTP のプロトコルに則っていない) のですが、TCP の 3way handshake やクローズの処理は正常に行えていることが確認できます。
+このプログラムを動かしてみると、`socket.sendall` や `socket.recv` がないので何もクライアントから送受信することは無い (e.g. HTTP のプロトコルに則っていない) のですが、TCP の 3way handshake やクローズの処理は正常に行えていることが確認できます。これだけで TCP コネクションの確立はできてしまうんですね。
 
 ```bash
 $ sudo tcpdump host 8.8.8.8 port 53 -ni any
@@ -74,7 +76,7 @@ options [mss 1430,sackOK,TS val 1138427843 ecr 3113655258,nop,wscale 8], length 
 16:12:47.323571 IP 10.3.0.5.50528 > 8.8.8.8.53: Flags [.], ack 2, win 502, options [nop,nop,TS val 3113655262 ecr 1138427846], length 0
 ```
 
-また、どのようなシステムコールを発行しているか、という点も抑えておきましょう。なぜなら、システムコールはアプリケーションからの要求をカーネルが受け取る唯一の方法であり、後に見るように、**システムコール次第で TCP KeepAlive の有効/無効が決定される**為です。TCP を管理するのは Kernel のネットワーク スタックなので、TCP KeepAlive に関する調節命令をアプリケーションからカーネルに出さないといけないのも納得ですね。
+アプリの実装を紐解く上では、どのようなシステムコールを発行しているか、という点も抑えておきましょう。なぜなら、システムコールはアプリケーションからの要求をカーネルが受け取る唯一の方法であり、後に見るように、**システムコール次第で TCP KeepAlive の有効/無効が決定される** 為です。TCP を管理するのは Kernel のネットワーク スタックなので、TCP KeepAlive に関する調節命令をアプリケーションからカーネルに出さないといけないのも納得ですね。
 
 プログラムが発行するシステムコールを調べるには `strace` を使います。
 
@@ -117,8 +119,8 @@ users:(("curl",pid=30213,fd=3)) timer:(keepalive,1min,0) uid:1000 ino:311003 sk:
 
 `curl` の方には、timer フィールドがあるのがわかりますね。詳細は `ss(8)` の man に載っていますが、実際、timer フィールドの有無で TCP KeepAlive の有効/無効を判定することが出来ます。具体的には、ESTABLISHED な TCP コネクションを `ss -o` で確認した時：
 
-- `timer:(keepalive, ...)` が存在する場合、TCP KeepAlive は有効
-- `timer:(keepalive, ...)` が存在しない場合、TCP KeepAlive は無効
+- `timer:(keepalive, ...)` が存在する場合、TCP KeepAlive は有効です。
+- `timer:(keepalive, ...)` が存在しない場合、TCP KeepAlive は無効です。
 
 ちなみに、timer のセマンティクスは以下の通りです。
 
@@ -146,7 +148,7 @@ timer:(<timer_name>,<expire_time>,<retrans>)
 
 ### strace による TCP KeepAlive 判定
 
-最初の Python プログラムでは TCP KeepAlive が有効になっていなかったことがわかりました。ここまでくればあともう一息です。最後に `curl` が発行しているシステムコールを見るだけです。具体的には、TCP KeepAlive オプションによるシステムコールの差分を見てみます。
+最初の Python プログラムでは TCP KeepAlive が有効になっていなかったことがわかりました。ここまでくればあともう一息。最後に `curl` が発行しているシステムコールを見るだけです。具体的には、TCP KeepAlive オプションによるシステムコールの差分を見てみます。
 
 ```diff
 $ strace -e trace=network -o on.log curl http://8.8.8.8:53
@@ -162,7 +164,7 @@ $ diff on.log off.log
 
 TCP KeepAlive が有効化されている時は `setsockopt` で指定されていますね。strace で見た時に `setsockopt(<sockfd>, SOL_SOCKET, SO_KEEPALIVE, [1], 4)`  が存在すれば有効になってそうな匂いを感じます (`TCP_KEEPIDLE` とか `TCP_KEEPINTVL` はデフォルト インターバル値の上書きと予想できます)。
 
-Linux のドキュメントを検索したところ、下記のセクション 4.2 にまさに探していた情報が載っていました。嗅覚は当たっていました :clap:
+Linux 関連のドキュメントを検索したところ、下記のセクション 4.2 にまさに探していた情報が載っていました。嗅覚は当たっていました :clap:
 
 > All you need to enable keepalive for a specific socket is to set the specific socket option on the socket itself. The prototype of the function is as follows:
 >
