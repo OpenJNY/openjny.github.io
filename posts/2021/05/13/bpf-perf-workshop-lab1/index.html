@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>bpf-perf-workshop: lab1 | $(ls /openjny/blog)</title>
+    <meta name="description" content="OpenJNY&#39;s Blog">
+    <link rel="icon" type="image/jpg" href="/img/favicon.png">
+  <meta name="keywords" content="機械学習, ネットワーク, お笑い">
+  <meta name="og:title" content="$(ls /openjny/blog)">
+  <meta name="og:description" content="OpenJNY のブログです。技術的な内容から日常的なことまで。">
+  <meta name="og:type" content="website">
+  <meta name="og:url" content="https://openjny.github.io/">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/mplus1p.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css">
+    <link rel="preload" href="/assets/css/0.styles.bb124a8c.css" as="style"><link rel="preload" href="/assets/js/app.dc028e91.js" as="script"><link rel="preload" href="/assets/js/6.da60bd61.js" as="script"><link rel="preload" href="/assets/js/22.05ca0468.js" as="script"><link rel="prefetch" href="/assets/js/1.1b1bf802.js"><link rel="prefetch" href="/assets/js/10.8c6fbe21.js"><link rel="prefetch" href="/assets/js/11.eadad559.js"><link rel="prefetch" href="/assets/js/12.6534dd5b.js"><link rel="prefetch" href="/assets/js/13.842634ec.js"><link rel="prefetch" href="/assets/js/14.16635b1e.js"><link rel="prefetch" href="/assets/js/15.8b241f4f.js"><link rel="prefetch" href="/assets/js/16.d67d8c3c.js"><link rel="prefetch" href="/assets/js/17.bb5604b6.js"><link rel="prefetch" href="/assets/js/18.426848b7.js"><link rel="prefetch" href="/assets/js/19.7762ce63.js"><link rel="prefetch" href="/assets/js/20.2ac9a129.js"><link rel="prefetch" href="/assets/js/21.493696c1.js"><link rel="prefetch" href="/assets/js/23.129066c0.js"><link rel="prefetch" href="/assets/js/24.281a909f.js"><link rel="prefetch" href="/assets/js/25.28bc829b.js"><link rel="prefetch" href="/assets/js/3.dab4048b.js"><link rel="prefetch" href="/assets/js/4.32c6ed03.js"><link rel="prefetch" href="/assets/js/5.e4585db8.js"><link rel="prefetch" href="/assets/js/7.62d67cb9.js"><link rel="prefetch" href="/assets/js/8.6ab3273d.js"><link rel="prefetch" href="/assets/js/9.56e78d39.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.bb124a8c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-7a046aea><div data-v-e4145d0a data-v-7a046aea><nav class="navbar" data-v-e4145d0a><div class="container" data-v-e4145d0a><a href="/" class="router-link-active" data-v-e4145d0a><span class="navbar-site-name" data-v-e4145d0a>
+          $(ls /openjny/blog)
+        </span></a> <div class="navbar-toggler" data-v-e4145d0a><svg class="icon" style="font-size:1.2em;" data-v-e4145d0a data-v-e4145d0a><title data-v-e4145d0a data-v-e4145d0a>menu</title><use xlink:href="#icon-menu" data-v-e4145d0a data-v-e4145d0a></use></svg></div> <div class="navbar-links" data-v-e4145d0a><a href="/" class="navbar-link" data-v-e4145d0a>
+            Home
+          </a><a href="/posts/" class="navbar-link router-link-active" data-v-e4145d0a>
+            Posts
+          </a><a href="/about-me/" class="navbar-link" data-v-e4145d0a>
+            About Me
+          </a><a href="https://qiita.com/OpenJNY" target="_blank" rel="noopener noreferrer" class="navbar-link" data-v-e4145d0a><span data-v-e4145d0a>Qiita</span> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" data-v-e4145d0a data-v-e4145d0a><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a><a href="https://github.com/OpenJNY/openjny.github.io/tree/vuepress" target="_blank" rel="noopener noreferrer" class="navbar-link" data-v-e4145d0a><span data-v-e4145d0a>Repo</span> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" data-v-e4145d0a data-v-e4145d0a><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-e4145d0a></div></div> <div class="banner" data-v-98d6aa8c data-v-7a046aea data-v-7a046aea><div class="container" data-v-98d6aa8c><div class="center" data-v-98d6aa8c><h1 data-v-98d6aa8c data-v-7a046aea>
+          bpf-perf-workshop: lab1
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-4dd605a1 data-v-4dd605a1><main class="main" data-v-4dd605a1><div class="post" data-v-4dd605a1 data-v-4dd605a1><section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      作成日 : 2021-05-13
+    </span> <span class="update-date" data-v-4e23451f>
+      更新日 : 2021-05-13
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2021/03/11/how-to-enable-tcp-keepalive-on-linux/" class="post-link" data-v-4e23451f>
+      前の投稿 : Linux での TCP KeepAlive 有効化方法
+    </a> <!----></section></section> <article class="main-div"><div class="post-content content content__default"><p>Brendan Gregg が開催したハンズオン ワークショップ &quot;bpf-perf-workshop&quot; より、最初の課題 &quot;lab1&quot; をやってみました。</p> <p></p><div class="table-of-contents"><ul><li><a href="#課題">課題</a></li><li><a href="#_60秒分析">60秒分析</a></li><li><a href="#bcc-tools">bcc tools</a><ul><li><a href="#execsnoop">execsnoop</a></li><li><a href="#opensnoop">opensnoop</a></li><li><a href="#ext4slower-or-btrfs-xfs-zfs">ext4slower (or btrfs, xfs, zfs*)</a></li><li><a href="#biolatency">biolatency</a></li><li><a href="#biosnoop">biosnoop</a></li><li><a href="#cachestat">cachestat</a></li><li><a href="#tcpconnect">tcpconnect</a></li><li><a href="#tcpaccept">tcpaccept</a></li><li><a href="#tcpretrans">tcpretrans</a></li><li><a href="#runqlat">runqlat</a></li></ul></li><li><a href="#答え合わせ">答え合わせ</a><ul><li><a href="#対応策-fsync-をやめる">対応策: fsync をやめる</a></li><li><a href="#その他の対応策">その他の対応策</a></li></ul></li></ul></div><p></p> <h2 id="課題"><a href="#課題" class="header-anchor">#</a> 課題</h2> <p>今回の問題はこちら。</p> <p><a href="https://github.com/brendangregg/bpf-perf-workshop/blob/master/lab1.md" target="_blank" rel="noopener noreferrer">bpf-perf-workshop/lab1.md at master · brendangregg/bpf-perf-workshop<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <blockquote><p>Problem Statement
+An application has higher-than expected latency, including latency outliers. Why, and how can performance be improved?</p></blockquote> <p>思ったようにパフォーマンスが出ない (i.e. 実行レイテンシが大きい) アプリケーション <code>./lab001</code> に対して、その理由と改善方法を調査しろ、という課題。</p> <h2 id="_60秒分析"><a href="#_60秒分析" class="header-anchor">#</a> 60秒分析</h2> <p>まずは、有名な 60 秒分析で CPU、Memory、FileSystem/Disks、Network のいずれがボトルネックになっているかフィーリングを掴む。</p> <p><a href="https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55" target="_blank" rel="noopener noreferrer">Linux Performance Analysis in 60,000 Milliseconds | by Netflix Technology Blog | Netflix TechBlog<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# uptime
+ 12:31:53 up 30 min,  3 users,  load average: 1.99, 1.37, 0.65
+</code></pre></div><p><code>lab001</code> を実行した後の <code>uptime</code> の結果が上。後半 3 つの値は、それぞれ直近 1, 5, 15 分での load average (移動指数平均) を表している。</p> <p>Linux での load average は、TASK_RUNNING + TASK_UNINTERRUPTIBLE 状態なタスク数の総和を表してることに注意すれば、<code>lab001</code> を実行したことでこれらタスクの数が増えてきていることが確認できる。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# dmesg | tail
+[   13.055942] audit: type=1400 audit(1620907273.224:11): apparmor=&quot;STATUS&quot; operation=&quot;profile_load&quot; profile=&quot;unconfined&quot; name=&quot;/usr/lib/snapd/snap-confine&quot; pid=841 comm=&quot;apparmor_parser&quot;
+[   18.327127] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+[   23.839985]  sda: sda1
+[   26.123281] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
+[   26.588156] new mount options do not match the existing superblock, will be ignored
+[   57.834818] hv_balloon: Max. dynamic memory size: 16384 MB
+[  109.372614] SGI XFS with ACLs, security attributes, realtime, no debug enabled
+[  109.466644] JFS: nTxBlock = 8192, nTxLock = 65536
+[  109.531712] ntfs: driver 2.1.32 [Flags: R/O MODULE].
+[  109.685490] QNX4 filesystem 0.2.3 registered.
+</code></pre></div><p><code>dmesg -T</code> とか見てみるとよく分かるけど、<code>lab001</code> を起動してからは特に異常が発生した様子はない。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# vmstat -S M 1
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 1  1      0  14846     88    786    0    0    77   342   56  187  1  0 96  3  0
+ 0  1      0  14846     88    786    0    0     0  1696  556 1637  0  0 97  2  0
+ 0  1      0  14846     88    786    0    0     0  3712  372 1641  0  0 80 19  0
+ 0  1      0  14846     88    786    0    0     0  1776  355 1681  0  0 76 24  0
+ 0  1      0  14846     88    786    0    0     0  3788  540 1747  0  1 93  6  0
+</code></pre></div><ul><li>UNINTERRUPTIBLE_SLEEP 状態なタスクが常に 1 つある</li> <li>User (us), System (sy) 時間ともにほとんど消費していない</li> <li>I/O 待ち (wa) 時間が比較的多い (24 %を占めるときもある)</li> <li>Swap In/Out はゼロで問題なし</li> <li>空きメモリも余裕がある</li></ul> <p>以上の点から、CPU やメモリでのボトルネックではなく、I/O でのボトルネック説が疑われる。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# mpstat -P ALL 1
+Linux 5.4.0-1047-azure (vm-ubuntu)      05/13/21        _x86_64_        (4 CPU)
+12:43:52     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+12:43:53     all    0.25    0.00    0.50   13.07    0.00    0.00    0.00    0.00    0.00   86.18
+12:43:53       0    0.00    0.00    0.00   51.52    0.00    0.00    0.00    0.00    0.00   48.48
+12:43:53       1    0.00    0.00    1.00    2.00    0.00    0.00    0.00    0.00    0.00   97.00
+12:43:53       2    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+12:43:53       3    0.00    0.00    1.01    0.00    0.00    0.00    0.00    0.00    0.00   98.99
+12:43:53     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+12:43:54     all    0.25    0.00    1.00    2.99    0.00    0.00    0.00    0.00    0.00   95.76
+12:43:54       0    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+12:43:54       1    1.00    0.00    0.00    3.00    0.00    0.00    0.00    0.00    0.00   96.00
+12:43:54       2    0.00    0.00    1.98    7.92    0.00    0.00    0.00    0.00    0.00   90.10
+12:43:54       3    0.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00   99.00
+12:43:54     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+12:43:55     all    0.00    0.00    0.50    1.50    0.00    0.00    0.00    0.00    0.00   97.99
+12:43:55       0    0.00    0.00    0.00    0.00    0.00    1.00    0.00    0.00    0.00   99.00
+12:43:55       1    0.00    0.00    1.00    3.00    0.00    0.00    0.00    0.00    0.00   96.00
+12:43:55       2    0.00    0.00    1.00    4.00    0.00    0.00    0.00    0.00    0.00   95.00
+12:43:55       3    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+</code></pre></div><p>論理 CPU ごとに負荷がばらけているわけではなく、CPU#0 で I/O Wait が発生するタスクが実行されている模様。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# pidstat 1
+Linux 5.4.0-1047-azure (vm-ubuntu)      05/13/21        _x86_64_        (4 CPU)
+12:45:12      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+12:45:13        0        11    0.99    0.00    0.00    0.00    0.99     3  rcu_sched
+12:45:13        0       380    0.00    1.98    0.00    0.00    1.98     2  jbd2/sdb1-8
+12:45:13        0      5689    0.00    0.99    0.00    0.00    0.99     1  lab001
+12:45:13        0      7009    0.99    0.00    0.00    0.00    0.99     3  pidstat
+12:45:13      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+12:45:14        0       380    0.00    1.00    0.00    0.00    1.00     2  jbd2/sdb1-8
+12:45:14        0      5689    0.00    1.00    0.00    0.00    1.00     1  lab001
+12:45:14        0      7009    0.00    1.00    0.00    0.00    1.00     3  pidstat
+12:45:14      UID       PID    %usr %system  %guest   %wait    %CPU   CPU  Command
+12:45:15        0       380    0.00    2.00    0.00    1.00    2.00     2  jbd2/sdb1-8
+12:45:15        0      5689    0.00    1.00    0.00    0.00    1.00     1  lab001
+</code></pre></div><p>pidstat が表示するパーセンテージは、全 CPU の総和である点に注意。あまり有益な情報は得られていない。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# iostat -xz 1
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.25    0.00    0.00    1.76    0.00   97.99
+Device            r/s     w/s     rkB/s     wkB/s   rrqm/s   wrqm/s  %rrqm  %wrqm r_await w_await aqu-sz rareq-sz wareq-sz  svctm  %util
+sdb              0.00  325.00      0.00   1748.00     0.00   112.00   0.00  25.63    0.00    3.00   0.68     0.00     5.38   3.06  99.60
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.25    1.51    0.00   98.24
+Device            r/s     w/s     rkB/s     wkB/s   rrqm/s   wrqm/s  %rrqm  %wrqm r_await w_await aqu-sz rareq-sz wareq-sz  svctm  %util
+sdb              0.00  262.00      0.00   3424.00     0.00    86.00   0.00  24.71    0.00    3.79   0.80     0.00    13.07   3.83 100.40
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.00    0.00    0.25   12.56    0.00   87.19
+Device            r/s     w/s     rkB/s     wkB/s   rrqm/s   wrqm/s  %rrqm  %wrqm r_await w_await aqu-sz rareq-sz wareq-sz  svctm  %util
+sdb              0.00  276.00      0.00   1472.00     0.00    92.00   0.00  25.00    0.00    3.59   0.78     0.00     5.33   3.64 100.40
+</code></pre></div><p><code>/dev/sdb</code>  に対して、Write 命令が多く見られる。具体的には、以下の通り:</p> <ul><li>秒あたりの Read リクエスト完了数 (r/s) はゼロ</li> <li>秒あたりの Write リクエスト完了数 (w/s) は 300 近い</li> <li>秒あたりの Read セクタ量 (rkB/s) はゼロ</li> <li>秒あたりの Write セクタ量 (wkB/s) は数千 Kbyte 近い</li></ul> <p>また、Write 側のキューサイズ (wavgqu-sz) が恒常的に 1 を超えた値を記録しているので、物理デバイス I/O の飽和が発生していることが、ここからもわかる。</p> <p>なお、Write リクエストのマージ率 (%wrqm) が 25% と比較的高いことから、同じようなセクタへの書き込みが多く発生していそうな匂いがする。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# free -m
+              total        used        free      shared  buff/cache   available
+Mem:          16013         295       14840           0         877       15431
+Swap:             0           0           0
+</code></pre></div><p>free + buff/cache ないしは available に全然余裕があるので、問題なし。<code>dmseg</code> で <code>oom-killer</code> も観測していない。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# sar -n DEV 1
+Linux 5.4.0-1047-azure (vm-ubuntu)      05/13/21        _x86_64_        (4 CPU)
+13:04:38        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s   %ifutil
+13:04:39           lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+13:04:39         eth0      1.00      0.00      0.06      0.00      0.00      0.00      0.00      0.00
+13:04:39        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s   %ifutil
+13:04:40           lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+13:04:40         eth0      1.00      2.00      0.06      1.49      0.00      0.00      0.00      0.00
+13:04:40        IFACE   rxpck/s   txpck/s    rxkB/s    txkB/s   rxcmp/s   txcmp/s  rxmcst/s   %ifutil
+13:04:41           lo      0.00      0.00      0.00      0.00      0.00      0.00      0.00      0.00
+13:04:41         eth0      1.00      1.00      0.06      0.60      0.00      0.00      0.00      0.00
+</code></pre></div><p>使用率 (%ifutil) を見ても全然余裕があるし、実際発生しているパケットの数や量 (*pck/s, *kB/s) も少ない。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# sar -n TCP,ETCP 1
+Linux 5.4.0-1047-azure (vm-ubuntu)      05/13/21        _x86_64_        (4 CPU)
+13:07:05     active/s passive/s    iseg/s    oseg/s
+13:07:06         0.00      0.00      1.00      0.00
+13:07:05     atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+13:07:06         0.00      0.00      0.00      0.00      0.00
+13:07:06     active/s passive/s    iseg/s    oseg/s
+13:07:07         0.00      0.00      1.00      2.00
+13:07:06     atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+13:07:07         0.00      0.00      0.00      0.00      0.00
+13:07:07     active/s passive/s    iseg/s    oseg/s
+13:07:08         0.00      0.00      1.00      2.00
+13:07:07     atmptf/s  estres/s retrans/s isegerr/s   orsts/s
+13:07:08         0.00      0.00      0.00      0.00      0.00
+</code></pre></div><p>念の為みてみたが、TCP レベルの stats でも問題ない。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~# top
+top - 13:08:08 up  1:07,  4 users,  load average: 2.05, 2.01, 1.90
+Tasks: 157 total,   1 running,  89 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.2 us,  0.6 sy,  0.0 ni, 92.6 id,  6.5 wa,  0.0 hi,  0.2 si,  0.0 st
+KiB Mem : 16398260 total, 15191744 free,   306500 used,   900016 buff/cache
+KiB Swap:        0 total,        0 free,        0 used. 15798152 avail Mem
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+  380 root      20   0       0      0      0 D   1.3  0.0   0:33.53 jbd2/sdb1-8
+ 5689 root      20   0    6564   3016   1136 D   1.0  0.0   0:30.62 lab001
+  418 root       0 -20       0      0      0 I   0.3  0.0   0:04.96 kworker/0:1H-kb
+ 8713 root      20   0   44560   3988   3344 R   0.3  0.0   0:00.05 top
+    1 root      20   0   78000   9032   6572 S   0.0  0.1   0:02.95 systemd
+</code></pre></div><p><code>D</code> (UNINTERRUPTIBLE_SLEEP) なプロセス 2 つが top の上位にきているので、こいつらが I/O (write) を占領していると考えるのが妥当そう。</p> <h2 id="bcc-tools"><a href="#bcc-tools" class="header-anchor">#</a> bcc tools</h2> <p>上記の 60 秒 (自分がやると数分かかる) 分析によって、PID=5689 の <code>lab001</code> が　I/O Write を大量に発行しているために、システムに負荷がかかっている可能性が高いことがわかった。
+続いて、bcc の一般的なツールを使って、更に詳細に分析していくことにする。</p> <p><a href="https://github.com/iovisor/bcc/blob/master/docs/tutorial.md#1-general-performance" target="_blank" rel="noopener noreferrer">bcc/tutorial.md at master · iovisor/bcc<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h3 id="execsnoop"><a href="#execsnoop" class="header-anchor">#</a> execsnoop</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./execsnoop.py
+PCOMM            PID    PPID   RET ARGS
+pgrep            9213   2672     0 /usr/bin/pgrep -U omsagent omiagent
+sh               9214   2672     0 /bin/sh -c /opt/omi/bin/omicli wql root/scx &quot;SELECT PercentUserTime, PercentPrivilegedTime, UsedMemory, PercentUsedMemory FROM SCX_UnixProc
+omicli           9216   9214     0 /opt/omi/bin/omicli wql root/scx SELECT PercentUserTime, PercentPrivilegedTime, UsedMemory, PercentUsedMemory FROM SCX_UnixProcessStatisticalInformation where Ha
+grep             9217   9214     0 /bin/grep =
+sh               9219   2672     0 /bin/sh -c /opt/omi/bin/omicli wql root/scx &quot;SELECT PercentUserTime, PercentPrivilegedTime, UsedMemory, PercentUsedMemory FROM SCX_UnixProc
+</code></pre></div><p>特に 5689 から child process が生成されているわけではない。</p> <h3 id="opensnoop"><a href="#opensnoop" class="header-anchor">#</a> opensnoop</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./opensnoop.py -p $(pgrep -nx lab001)
+PID    COMM               FD ERR PATH
+</code></pre></div><p>新たに file を open している訳ではない</p> <h3 id="ext4slower-or-btrfs-xfs-zfs"><a href="#ext4slower-or-btrfs-xfs-zfs" class="header-anchor">#</a> ext4slower (or btrfs*, xfs*, zfs*)</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./ext4slower.py
+Tracing ext4 operations slower than 10 ms
+TIME     COMM           PID    T BYTES   OFF_KB   LAT(ms) FILENAME
+13:22:38 lab001         5689   S 0       0          10.15 lab001.log
+13:22:38 lab001         5689   S 0       0          11.70 lab001.log
+13:22:39 lab001         5689   S 0       0          11.76 lab001.log
+13:22:39 lab001         5689   S 0       0          10.42 lab001.log
+13:22:39 lab001         5689   S 0       0          10.02 lab001.log
+</code></pre></div><p>同じ path の file に対して、<code>S</code> の種別のオペレーションが多発している。<code>ext4slower.py</code> の実装を見ると、Type は以下のように定義されている。</p> <ul><li><code>R</code>: read</li> <li><code>W</code>: write</li> <li><code>O</code>: open</li> <li><code>S</code>: fsync</li></ul> <p>つまり、1 秒間に数回の高頻度で fsync が実施されていることがわかる。</p> <h3 id="biolatency"><a href="#biolatency" class="header-anchor">#</a> biolatency</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./biolatency.py -D -Q
+Tracing block device I/O... Hit Ctrl-C to end.
+^C
+disk = b'sdb'
+     usecs               : count     distribution
+         0 -&gt; 1          : 0        |                                        |
+         2 -&gt; 3          : 0        |                                        |
+         4 -&gt; 7          : 0        |                                        |
+         8 -&gt; 15         : 0        |                                        |
+        16 -&gt; 31         : 0        |                                        |
+        32 -&gt; 63         : 39       |****                                    |
+        64 -&gt; 127        : 356      |****************************************|
+       128 -&gt; 255        : 316      |***********************************     |
+       256 -&gt; 511        : 169      |******************                      |
+       512 -&gt; 1023       : 74       |********                                |
+      1024 -&gt; 2047       : 16       |*                                       |
+      2048 -&gt; 4095       : 4        |                                        |
+      4096 -&gt; 8191       : 258      |****************************            |
+      8192 -&gt; 16383      : 210      |***********************                 |
+     16384 -&gt; 32767      : 12       |*                                       |
+     32768 -&gt; 65535      : 1        |                                        |
+</code></pre></div><p>Disk queue に入ってから完了するまでのレイテンシー分布を表示。分布が二峰になっているので、レイテンシーが遅いほうの分布は特定プログラム (i.e. lab001) による影響と仮設できる。</p> <h3 id="biosnoop"><a href="#biosnoop" class="header-anchor">#</a> biosnoop</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./biosnoop.py
+TIME(s)     COMM           PID    DISK    T SECTOR     BYTES  LAT(ms)
+0.000000    jbd2/sdb1-8    380    sdb     W 2406576    4096      3.21
+0.000348    lab001         5689   sdb     W 9009528    4096      0.21
+0.000524    jbd2/sdb1-8    380    sdb     W 2406584    8192      0.14
+0.004578    ?              0              R 0          0         4.00
+0.007575    jbd2/sdb1-8    380    sdb     W 2406600    4096      2.96
+0.007825    lab001         5689   sdb     W 9009528    4096      0.17
+0.007917    jbd2/sdb1-8    380    sdb     W 2406608    8192      0.06
+</code></pre></div><p>やはり lab001 による Write リクエストが多く発生している。ext4 用のジャーナリングシステムである <code>jdb2</code> が連動していること、lab001 が発行する wirte のサイズが 4096 であることを考慮して、以下のように推測できる:</p> <ul><li>lab001 が頻繁に書き込みしているファイルシステムは ext4 であり、その block size はデフォルトの 4096 byte である。</li></ul> <p>ファイルシステムに疎いので、また別の機会に ext4 と jdb2 について調べてみたい。</p> <h3 id="cachestat"><a href="#cachestat" class="header-anchor">#</a> cachestat</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./cachestat.py
+    HITS   MISSES  DIRTIES HITRATIO   BUFFERS_MB  CACHED_MB
+       0        0      720    0.00%           93        782
+     132        0      211  100.00%           93        782
+       0        0      724    0.00%           93        782
+     106        0      210  100.00%           93        782
+       0        0      716    0.00%           93        782
+     112        0      220  100.00%           93        782
+       0        0      708    0.00%           93        782
+</code></pre></div><p>ファイルシステムでのキャッシュヒット率には問題はなし。</p> <h3 id="tcpconnect"><a href="#tcpconnect" class="header-anchor">#</a> tcpconnect</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./tcpconnect.py
+Tracing connect ... Hit Ctrl-C to end
+PID    COMM         IP SADDR            DADDR            DPORT
+1628   python3      4  10.0.0.4         168.63.129.16    80
+1628   python3      4  10.0.0.4         168.63.129.16    32526
+1628   python3      4  10.0.0.4         168.63.129.16    80
+1628   python3      4  10.0.0.4         169.254.169.254  80
+1628   python3      4  10.0.0.4         168.63.129.16    80
+</code></pre></div><p>Azure VM でホストした Ubuntu マシンだったので、管理用エージェント (waagent) が仮想 IP と通信している様子が見えた。それ以外に怪しい点はなし。</p> <h3 id="tcpaccept"><a href="#tcpaccept" class="header-anchor">#</a> tcpaccept</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./tcpaccept.py
+PID     COMM         IP RADDR            RPORT LADDR            LPORT
+</code></pre></div><p>passive TCP コネクション (accept 経由の TCP コネクション確立) は特に発生なし。</p> <h3 id="tcpretrans"><a href="#tcpretrans" class="header-anchor">#</a> tcpretrans</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./tcpretrans.py
+Tracing retransmits ... Hit Ctrl-C to end
+TIME     PID    IP LADDR:LPORT          T&gt; RADDR:RPORT          STATE
+</code></pre></div><p>TCP コネクションの再送もなし。</p> <h3 id="runqlat"><a href="#runqlat" class="header-anchor">#</a> runqlat</h3> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./runqlat.py
+Tracing run queue latency... Hit Ctrl-C to end.
+^C
+     usecs               : count     distribution
+         0 -&gt; 1          : 200      |**                                      |
+         2 -&gt; 3          : 779      |*********                               |
+         4 -&gt; 7          : 1761     |********************                    |
+         8 -&gt; 15         : 3433     |****************************************|
+        16 -&gt; 31         : 1086     |************                            |
+        32 -&gt; 63         : 91       |*                                       |
+        64 -&gt; 127        : 649      |*******                                 |
+       128 -&gt; 255        : 9        |                                        |
+       256 -&gt; 511        : 3        |                                        |
+       512 -&gt; 1023       : 3        |                                        |
+      1024 -&gt; 2047       : 1        |                                        |
+      2048 -&gt; 4095       : 1        |                                        |
+</code></pre></div><p>ran queue レイテンシの分布を見ても、queue 内で長い間待たされている Task はほぼないので、CPU の飽和は認められない。</p> <h2 id="答え合わせ"><a href="#答え合わせ" class="header-anchor">#</a> 答え合わせ</h2> <p>実行していたアプリケーションのソースコードは下記に存在する。</p> <p><a href="https://github.com/brendangregg/bpf-perf-workshop/blob/master/src/lab001.c" target="_blank" rel="noopener noreferrer">bpf-perf-workshop/lab001.c at master · brendangregg/bpf-perf-workshop<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <ul><li><code>fsync</code> を伴う <code>write</code> (os_write 関数) を永遠に回すプログラム</li> <li>128 byte もしくは 2 Mbyte ずつ、zero 埋めされた配列を os_wirte で書き込んでいく。</li> <li>ファイルサイズ (50 Mbyte) の最後まで zero 配列を書き込んだら、<code>lseek</code> で offset=0 に戻って再度やり直し。</li></ul> <p>ということで、<code>fsync</code> を伴っているために、128 byte の書き込みを行うときは、ext4 の block size である 4096 byte に書き込みが expand される。そのため、殆どが無駄な I/O になってしまっていることがわかる。以下の <code>biosnoop.py</code> からも、4096 byte の物理 I/O (FIleSytem -&gt; Disk の要求) が発生していることが確認できる。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# ./biosnoop.py | grep lab001
+TIME(s)     COMM           PID    DISK    T SECTOR     BYTES  LAT(ms)
+...
+2.197601    jbd2/sdb1-8    380    sdb     W 2384488    4096      3.45
+2.197816    lab001         5689   sdb     W 8997120    4096      0.08
+2.198063    jbd2/sdb1-8    380    sdb     W 2384496    8192      0.19
+2.203421    ?              0              R 0          0         5.34
+2.207513    jbd2/sdb1-8    380    sdb     W 2384512    4096      4.06
+2.209320    lab001         5689   sdb     W 8997120    524288    0.47
+2.209352    lab001         5689   sdb     W 8998144    524288    0.49
+2.209510    lab001         5689   sdb     W 8999168    524288    0.64
+2.209675    lab001         5689   sdb     W 9000192    524288    0.80
+2.209854    lab001         5689   sdb     W 9001216    4096      0.97
+2.209957    jbd2/sdb1-8    380    sdb     W 2384520    8192      0.06
+2.229271    ?              0              R 0          0        19.30
+2.232790    jbd2/sdb1-8    380    sdb     W 2384536    4096      3.48
+2.233011    lab001         5689   sdb     W 9001216    4096      0.11
+2.233180    jbd2/sdb1-8    380    sdb     W 2384544    8192      0.10
+2.237200    ?              0              R 0          0         4.00
+</code></pre></div><p>なお、途中で 524288 byte の write 要求 4 つ続く箇所があるが、これが 2 Mbyte の書き込みに相当する。</p> <p>ext4 が物理 I/O を 524,288 byte に丸めこんでいるために 4 つに分割されていると推測できるが、今の知識では ext4 ファイルシステムが物理 I/O を計算する方法がわかららず、なぜ 4 分割されているのか (128 blocks 分で物理 I/O を発行しているのか) わからなかった。これは今後の課題としたい。</p> <h3 id="対応策-fsync-をやめる"><a href="#対応策-fsync-をやめる" class="header-anchor">#</a> 対応策: fsync をやめる</h3> <p>最も単純かつ効果の高い対応方法は <code>fsync</code> をやめることだろう。つまり、<code>lab001.c</code> に下記の変更を加える。</p> <div class="language-diff extra-class"><pre class="language-diff"><code><span class="token deleted-sign deleted">- fsync(fd);
+</span><span class="token inserted-sign inserted">+ //fsync(fd);
+</span></code></pre></div><p>再コンパイルして得られた新たなアプリケーションでは、下記のように I/O の改善が見られた。
+文章にすると、「file system の write buffer (キャッシュ) によって、物理 I/O の発行数が減り、<code>lab001</code> や ext4 ジャーナリングシステムが I/O 待ちすることがなくなった」というところでしょうか。</p> <div class="language- extra-class"><pre class="language-text"><code>root@vm-ubuntu:~/bcc/tools# uptime
+ 14:54:26 up  2:53,  5 users,  load average: 1.03, 1.23, 1.62
+root@vm-ubuntu:~/bcc/tools# vmstat -S k 1
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 2  0      0 15414116 102080 949317    0    0    19   601  108  351  0  1 93  6  0
+ 1  0      0 15414108 102080 949317    0    0     0     0  100  261  2 23 75  0  0
+ 1  0      0 15414108 102080 949317    0    0     0     4  111  303  2 23 75  0  0
+ 1  0      0 15414108 102080 949317    0    0     0 96860   96  255  1 16 74 10  0
+ 1  0      0 15414206 102080 949317    0    0     0     0   54  243  2 24 75  0  0
+ 1  0      0 15414206 102080 949321    0    0     0     0   75  212  2 24 75  0  0
+ 1  0      0 15414206 102080 949321    0    0     0     0   68  175  1 24 75  0  0
+ 1  0      0 15414206 102080 949321    0    0     0     0   44  112  2 23 75  0  0
+ 1  0      0 15414206 102080 949321    0    0     0     4  219  462  2 24 74  0  0
+ 1  0      0 15414206 102080 949317    0    0     0     4  637 1297  2 24 74  0  0
+root@vm-ubuntu:~/bcc/tools# iostat -xz 1
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           2.26    0.00   23.06    0.00    0.00   74.69
+Device            r/s     w/s     rkB/s     wkB/s   rrqm/s   wrqm/s  %rrqm  %wrqm r_await w_await aqu-sz rareq-sz wareq-sz  svctm  %util
+sdb              0.00    1.00      0.00      4.00     0.00     0.00   0.00   0.00    0.00    0.00   0.00     0.00     4.00   4.00   0.40
+</code></pre></div><h3 id="その他の対応策"><a href="#その他の対応策" class="header-anchor">#</a> その他の対応策</h3> <p>おそらく他に効果のある対応は以下の通り (最後の方はシステムワイドな変更なので、多分実現可能性は低そう)。</p> <ul><li>論理 I/O (write) の書き込みサイズを、統一して大きくする</li> <li>同じ箇所 (論理 offset) の書き込みを繰り返すスレッドに分割する (e.g. thread0 は offset = [0, 4096] を担当)</li> <li>ファイルシステム (ext4) のブロックサイズを、論理 I/O にあわせて調節する</li> <li>ファイルシステムでジャーナリングを無効化する</li></ul></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      作成日 : 2021-05-13
+    </span> <span class="update-date" data-v-4e23451f>
+      更新日 : 2021-05-13
+    </span></section> <section class="post-links" data-v-4e23451f><a href="/posts/2021/03/11/how-to-enable-tcp-keepalive-on-linux/" class="post-link" data-v-4e23451f>
+      前の投稿 : Linux での TCP KeepAlive 有効化方法
+    </a> <!----></section></section> <!----></div></main> <aside class="aside" data-v-4dd605a1><div class="info-card main-div" data-v-9d847660 data-v-4dd605a1><div class="info-card-header" data-v-9d847660><img src="https://pbs.twimg.com/profile_images/845174054273236993/aYDqys_v_400x400.jpg" alt="OpenJNY" class="info-avatar" data-v-9d847660></div> <div class="info-card-body" data-v-9d847660><section class="info-nickname" data-v-9d847660>
+      OpenJNY
+    </section> <section class="info-desc" data-v-9d847660>Laugh and grow fat :D</section> <section class="info-contact" data-v-9d847660><section data-v-9d847660><span title="Tokyo, Japan" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Tokyo, Japan</title><use xlink:href="#icon-location" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          Tokyo, Japan
+        </span></span></section> <!----> <section data-v-9d847660><a href="mailto:openjny@gmail.com" title="openjny@gmail.com" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>openjny@gmail.com</title><use xlink:href="#icon-email" data-v-9d847660 data-v-9d847660></use></svg><span class="info-text" data-v-9d847660 data-v-9d847660>
+          openjny@gmail.com
+        </span></a></section></section></div> <div class="info-card-footer" data-v-9d847660><section class="info-sns clearfix" data-v-9d847660><a href="https://twitter.com/openjny" target="_blank" class="sns-link" data-v-9d847660><span title="Twitter: openjny" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Twitter: openjny</title><use xlink:href="#icon-twitter" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://github.com/openjny" target="_blank" class="sns-link" data-v-9d847660><span title="GitHub: openjny" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>GitHub: openjny</title><use xlink:href="#icon-github" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://www.linkedin.com/in/ja-junya-yamaguchi" target="_blank" class="sns-link" data-v-9d847660><span title="LinkedIn: junya-yamaguchi" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>LinkedIn: junya-yamaguchi</title><use xlink:href="#icon-linkedin" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://gitlab.com/openjny" target="_blank" class="sns-link" data-v-9d847660><span title="GitLab: openjny" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>GitLab: openjny</title><use xlink:href="#icon-gitlab" data-v-9d847660 data-v-9d847660></use></svg></span></a><a href="https://bitbucket.org/openjny" target="_blank" class="sns-link" data-v-9d847660><span title="Bitbucket: openjny" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>Bitbucket: openjny</title><use xlink:href="#icon-bitbucket" data-v-9d847660 data-v-9d847660></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-4dd605a1><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>目次</span> <div class="post-nav-toc"><ul><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#課題">課題</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#_60秒分析">60秒分析</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#bcc-tools">bcc tools</a><ul><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#execsnoop">execsnoop</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#opensnoop">opensnoop</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#ext4slower-or-btrfs-xfs-zfs">ext4slower (or btrfs, xfs, zfs*)</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#biolatency">biolatency</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#biosnoop">biosnoop</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#cachestat">cachestat</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#tcpconnect">tcpconnect</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#tcpaccept">tcpaccept</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#tcpretrans">tcpretrans</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#runqlat">runqlat</a></li></ul></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#答え合わせ">答え合わせ</a><ul><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#対応策-fsync-をやめる">対応策: fsync をやめる</a></li><li><a href="/posts/2021/05/13/bpf-perf-workshop-lab1/#その他の対応策">その他の対応策</a></li></ul></li></ul></div></div> <!----></div></aside></div> <footer class="footer" data-v-1375e54c><p class="footer-sns-links" data-v-1375e54c><a href="https://twitter.com/openjny" target="_blank" class="sns-link" data-v-1375e54c><span title="Twitter: openjny" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>Twitter: openjny</title><use xlink:href="#icon-twitter" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://github.com/openjny" target="_blank" class="sns-link" data-v-1375e54c><span title="GitHub: openjny" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>GitHub: openjny</title><use xlink:href="#icon-github" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://www.linkedin.com/in/ja-junya-yamaguchi" target="_blank" class="sns-link" data-v-1375e54c><span title="LinkedIn: junya-yamaguchi" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>LinkedIn: junya-yamaguchi</title><use xlink:href="#icon-linkedin" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://gitlab.com/openjny" target="_blank" class="sns-link" data-v-1375e54c><span title="GitLab: openjny" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>GitLab: openjny</title><use xlink:href="#icon-gitlab" data-v-1375e54c data-v-1375e54c></use></svg></span></a><a href="https://bitbucket.org/openjny" target="_blank" class="sns-link" data-v-1375e54c><span title="Bitbucket: openjny" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>Bitbucket: openjny</title><use xlink:href="#icon-bitbucket" data-v-1375e54c data-v-1375e54c></use></svg></span></a></p> <p class="footer-text" data-v-1375e54c><span data-v-1375e54c>Powered by </span> <a href="https://github.com/vuejs/vuepress" target="_blank" data-v-1375e54c>
+      VuePress
+    </a> <span data-v-1375e54c> | </span> <a href="https://github.com/meteorlxy/vuepress-theme-meteorlxy" target="_blank" data-v-1375e54c>
+        meteorlxy
+      </a></p> <!----></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.dc028e91.js" defer></script><script src="/assets/js/6.da60bd61.js" defer></script><script src="/assets/js/22.05ca0468.js" defer></script>
+  </body>
+</html>
