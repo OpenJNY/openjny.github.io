@@ -1,12 +1,12 @@
 ---
-title: "bpf-perf-workshop: lab1"
+title: "[bpf-perf-workshop] lab1: レイテンシ調査"
 date: 2021-05-13 19:20:00
 category: Linux
 tags:
   - Systems Performance
 ---
 
-Brendan Gregg が開催したハンズオン ワークショップ "bpf-perf-workshop" より、最初の課題 "lab1" をやってみました。
+Brendan Gregg 氏のハンズオン ワークショップ "bpf-perf-workshop" より、最初の課題 (アプリケーション レイテンシの調査課題) "lab2" をやってみました。
 
 <!-- more -->
 
