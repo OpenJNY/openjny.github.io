@@ -1,5 +1,5 @@
 module.exports = {
-    title: '$(ls /openjny/blog)',
+    title: '/etc/openjny',
     description: "OpenJNY's Blog",
     locales: {
         '/': {
@@ -26,7 +26,7 @@ module.exports = {
             // organization: 'Foo bar company.',
             // Your avatar image
             // Set to external link
-            avatar: 'https://pbs.twimg.com/profile_images/845174054273236993/aYDqys_v_400x400.jpg',
+            avatar: 'https://pbs.twimg.com/profile_images/1347343742362034176/JolObIwJ_400x400.jpg',
             // Or put into `.vuepress/public` directory. E.g. `.vuepress/public/img/avatar.jpg`
             // avatar: '/img/avatar.jpg',
             // Accounts of SNS
@@ -135,11 +135,11 @@ module.exports = {
         }],
         ['meta', {
             name: "keywords",
-            content: "機械学習, ネットワーク, お笑い"
+            content: ""
         }],
         ['meta', {
             name: "og:title",
-            content: "$(ls /openjny/blog)"
+            content: "/etc/openjny"
         }],
         ['meta', {
             name: "og:description",
@@ -164,7 +164,7 @@ module.exports = {
         // for markdown-it-katex
         ['link', {
             rel: 'stylesheet',
-            href: 'https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css'
+            href: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
         }]
     ],
     markdown: {
